@@ -10,7 +10,7 @@
         {{ product.description }}
       </p>
       <p class="mb-2 mt-2 font-bold text-lg text-red-500">${{ product.price }}</p>
-      <router-link to="/">
+      <router-link :to="{ name: 'product', params: { slug: product.slug } }">
         <span class="text-blue-400 hover:underline">See more...</span>
       </router-link>
     </div>

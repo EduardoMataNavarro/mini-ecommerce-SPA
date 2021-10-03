@@ -20,5 +20,11 @@ npm run build
 npm run lint
 ```
 
+### User credentials 
+```
+user email: admin@admins.com
+user password: password
+```
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
