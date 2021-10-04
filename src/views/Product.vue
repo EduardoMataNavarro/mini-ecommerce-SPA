@@ -10,6 +10,10 @@
         <h2 class="text-2xl font-light block text-blue-500 nt-2 mb-8">
           ${{ product.price }}
         </h2>
+        <h2 class="text-xl font-light text-gray-400">Current quantity</h2>
+        <span class="text-md font-bold text-blue-400 mb-6">
+          {{ product.current_quantity }}
+        </span>
         <h2 class="text-xl font-light block text-gray-400">Category</h2>
         <h2 class="text-md font-bold block text-blue-400 mb-6">
           {{ product.product_category?.name }}
@@ -19,22 +23,25 @@
           {{ product.description }}
         </p>
         <div class="mt-6">
-          <button
-            class="
-              bg-blue-400
-              hover:bg-blue-500
-              text-white
-              rounded-lg
-              shadow-md
-              w-full
-              p-4
-              mt-4
-              m-auto
-              position-relative
-            "
-          >
-            Buy now
-          </button>
+          <router-link :to="{ name: 'buy', parameters: { slug: slug } }">
+            <div
+              class="
+                bg-blue-400
+                hover:bg-blue-500
+                text-white
+                rounded-lg
+                shadow-md
+                w-full
+                p-4
+                mt-4
+                m-auto
+                relative
+                text-center
+              "
+            >
+              Buy now
+            </div>
+          </router-link>
           <div
             v-if="isInCart"
             class="
@@ -45,7 +52,7 @@
               p-4
               mt-4
               m-auto
-              position-relative
+              relative
             "
           >
             Added to cart
@@ -78,10 +85,11 @@ export default {
   components: { TopNav },
   data: () => ({
     product: {},
+    slug: "",
     isInCart: false,
   }),
   mounted() {
-    console.log(this.$route.params.slug);
+    this.slug = this.$route.params.slug;
     axios.get(`api/product/${this.$route.params.slug}`).then((res) => {
       console.log(res.data);
       this.product = res.data;
